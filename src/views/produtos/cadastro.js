@@ -1,17 +1,24 @@
 import React from 'react'
+import ProdutoService from "../../app/produtoService"
 
 const estadoInicial = {
     nome:'',
     sku:'',
     descricao:'',
     preco: 0,
-    fornecedor:''
+    fornecedor:'',
+    sucesso:false
 
 }
 
 export default class CadastroProduto extends React.Component{
 
         state = estadoInicial;
+
+        constructor(){
+            super()
+            this.service = new ProdutoService();
+        }
 
 
         onChange = (event)=>{
@@ -23,7 +30,15 @@ export default class CadastroProduto extends React.Component{
         }
 
         onSubmit = (event) => {
-            console.log(this.state)
+            const produto = {
+                nome:this.state.nome,
+                sku:this.state.sku,
+                descricao:this.state.descricao,
+                preco: this.state.preco,
+                fornecedor:this.state.fornecedor
+            }
+            this.service.salvar(produto)
+            this.setState({ sucesso: true})
         }
 
         limpaCampos = () => {
@@ -38,6 +53,14 @@ export default class CadastroProduto extends React.Component{
                     Cadastro de Produtos
                 </div>
                 <div className="card-body">
+
+            {this.state.sucesso &&
+                <div className="alert alert-dismissible alert-success">
+                    <button type="button" className="close" data-dismiss="alert">&times;</button>
+                    <strong>Sucesso!</strong> Cadastro realizado com sucesso!.
+                </div>
+            }
+
 
                     <div className="row">
                         <div className="col-md-6">
