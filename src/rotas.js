@@ -7,12 +7,12 @@ import ConsultaProdutos from './views/produtos/consulta'
 
 export default () => {
     return(
-        <HashRouter>
-            <switch>
-                <Route exact path="/cadastro-produtos" component={CadastroProduto} />
+
+            <Switch>
+                <Route exact path="/cadastro-produtos/:sku?" component={CadastroProduto} />
                 <Route exact path="/consulta-produtos" component={ConsultaProdutos} />
                 <Route exact path="/" component={Home} />
-            </switch>
-        </HashRouter>
+            </Switch>
+
     )
 }
