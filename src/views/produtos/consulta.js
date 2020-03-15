@@ -21,6 +21,10 @@ import {withRouter} from 'react-router-dom'
         console.log(sku)
         this.props.history.push(`/cadastro-produtos/${sku}`)
     }
+    deletar = (sku) => {
+       const produtos = this.service.deletar(sku)
+       this.setState({produtos})
+    }
 
         render(){
             return(
@@ -50,8 +54,8 @@ import {withRouter} from 'react-router-dom'
                                         <th>{produto.preco}</th>
                                         <th>{produto.fornecedor}</th>
                                         <th>
-                                            <button onClick={() =>this.preparaEditar(produto.sku)} className="btn mr-1 btn-primary">Editar</button>
-                                            <button className="btn mr-1 btn-danger">Remover</button>
+                                            <button onClick={() => this.preparaEditar(produto.sku)} className="btn mr-1 btn-primary">Editar</button>
+                                            <button onClick={() => this.deletar(produto.sku) } className="btn mr-1 btn-danger">Remover</button>
                                         </th>
                                     </tr>
                                 )})}
